@@ -1,16 +1,30 @@
 ---
+import { getCollection } from "astro:content"
 
+import Link from "../components/Link.svelte"
+import Layout from "../layouts/Layout.astro"
+
+import Project from "../components/Project.astro"
+import { getProjects } from "../lib/projects"
+
+const title = "tan wei hup"
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout {title} description="A website by Tan Wei Hup." image="https://og.nxl.sh/home">
+	<h1 slot="header-content" class="text-neutral-500">Tan Wei Hup</h1>
+
+	<main class="">
+		<p class="my-6 text-justify text-[16px] text-[#D4D4D4]">
+			Welcome visitors, I'm <strong>Wei Hup</strong> and <strong>Tan</strong> is my surname. I'm from
+			Asia Pacific University based in Malaysia. Currently Year 2. Passionate about web development and
+			learning still. Because I feel like the web has a lot of freedom in building stuff. Although mobile
+			dev is fun as well :)
+		</p>
+
+		<h2 class="mt-12 mb-6 text-[20px] font-semibold">Some Projects I Built 💻</h2>
+
+		<div class="grid grid-cols-2 gap-4 md:grid-cols-3">
+			{getProjects.map((project) => <Project {project} />)}
+		</div>
+	</main>
+</Layout>

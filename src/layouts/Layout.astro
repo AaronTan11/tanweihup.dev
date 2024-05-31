@@ -1,31 +1,30 @@
 ---
-import { ViewTransitions } from "astro:transitions"
-import Link from "../components/Link.vue"
-import Footer from "../components/Footer.astro"
-import { fade } from "astro:transitions"
-import Navbar from "../components/Navbar.astro"
+import { ViewTransitions } from "astro:transitions";
+
+import { fade } from "astro:transitions";
+import Navbar from "../components/Navbar.astro";
+import Link from "../components/Link.svelte";
+import Footer from "../components/Footer.astro";
 
 type Props = {
-  title: string
-  description: string
-  image?: string
-}
+  title: string;
+  description: string;
+  image?: string;
+};
 
-const { title, description, image } = Astro.props
-const { pathname } = Astro.url
+const { title, description, image } = Astro.props;
+const { pathname } = Astro.url;
 
-let href = "hi"
+let href = "hi";
 
-if (pathname === "/blog" || pathname === "/blog/")
-  href = "/"
-else if (pathname.startsWith("/blog/"))
-  href = "/blog"
-else href = "/"
+if (pathname === "/blog" || pathname === "/blog/") href = "/";
+else if (pathname.startsWith("/blog/")) href = "/blog";
+else href = "/";
 ---
 
 <html lang="en">
   <head>
-    <ViewTransitions transition:animate={fade({duration: "0.1s"})} />
+    <ViewTransitions transition:animate={fade({ duration: "0.1s" })} />
 
     <!-- global metadata -->
     <meta charset="utf-8" />
@@ -54,7 +53,7 @@ else href = "/"
     <meta property="twitter:image" content={image} />
 
     <!-- link tags -->
-    <link rel="sitemap" href="/sitemap-index.xml">
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <link
       rel="preload"
       href="/fonts/Switzer.woff2"
@@ -71,9 +70,8 @@ else href = "/"
     />
   </head>
 
-  <body>
-    <div class="mx-auto max-w-container px-4">
-
+  <body class="px-4 py-8 bg-[#171717] text-white">
+    <div class="max-w-[43rem] mx-auto px-4">
       <header class="h-37.5px flex items-center justify-between -mt-2">
         <slot name="header-content">
           <Link {href}>← back</Link>
@@ -84,9 +82,9 @@ else href = "/"
 
       <slot />
 
-      <div class="mt-24" />
+      <div class="mt-24"></div>
+
       <Footer />
     </div>
   </body>
 </html>
-
