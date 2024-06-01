@@ -1,30 +1,55 @@
 ---
-import { getCollection } from "astro:content"
+import { getCollection } from "astro:content";
+import { sortPostsByDate } from "../lib/date";
 
-import Link from "../components/Link.svelte"
-import Layout from "../layouts/Layout.astro"
+import Link from "../components/Link.svelte";
+import Layout from "../layouts/Layout.astro";
 
-import Project from "../components/Project.astro"
-import { getProjects } from "../lib/projects"
+import Project from "../components/Project.astro";
+import { getProjects } from "../lib/projects";
+import PostRow from "../components/PostRow.astro";
 
-const title = "tan wei hup"
+const posts = sortPostsByDate(
+  await getCollection(
+    "blog",
+    ({ data }: { data: any }) => data.isDraft !== true,
+  ),
+).slice(0, 4);
+
+const title = "Tan Wei Hup | Home";
 ---
 
-<Layout {title} description="A website by Tan Wei Hup." image="https://og.nxl.sh/home">
-	<h1 slot="header-content" class="text-neutral-500">Tan Wei Hup</h1>
+<Layout {title} description="A website by Tan Wei Hup." image="">
+  <h1 slot="header-content" class="text-neutral-500">Tan Wei Hup</h1>
 
-	<main class="">
-		<p class="my-6 text-justify text-[16px] text-[#D4D4D4]">
-			Welcome visitors, I'm <strong>Wei Hup</strong> and <strong>Tan</strong> is my surname. I'm from
-			Asia Pacific University based in Malaysia. Currently Year 2. Passionate about web development and
-			learning still. Because I feel like the web has a lot of freedom in building stuff. Although mobile
-			dev is fun as well :)
-		</p>
+  <main class="">
+    <p class="my-6 text-justify text-[16px]">
+      Welcome visitors, I'm <strong class="text-white">Wei Hup</strong> and <strong
+        class="text-white">Tan</strong
+      > is my surname. I'm from Asia Pacific University based in Malaysia. Currently
+      Year 2. Passionate about web development and learning still. Because I feel
+      like the web has a lot of freedom in building stuff. Although mobile dev is
+      fun as well :)
+    </p>
 
-		<h2 class="mt-12 mb-6 text-[20px] font-semibold">Some Projects I Built 💻</h2>
+    <h2 class="mt-12 mb-6 text-[20px] font-semibold text-white">
+      Some Projects I Built 💻
+    </h2>
 
-		<div class="grid grid-cols-2 gap-4 md:grid-cols-3">
-			{getProjects.map((project) => <Project {project} />)}
-		</div>
-	</main>
+    <div class="grid grid-cols-2 gap-4 md:grid-cols-3">
+      {getProjects.map((project) => <Project {project} />)}
+    </div>
+
+    <div class="mt-12"></div>
+    <h2 class="mt-12 mb-6 text-[20px] font-semibold text-white">Blog</h2>
+
+    <div class="flex flex-col gap-4">
+      {posts.map((post) => <PostRow {post} />)}
+
+      <span>
+        <Link href="/blog">Coming Soon</Link>
+        <!-- → -->
+      </span>
+    </div>
+  </main>
 </Layout>
