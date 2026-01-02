@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useQuery } from "convex/react";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { api } from "@tanweihup.dev/backend/convex/_generated/api";
 import { convexQuery } from "@convex-dev/react-query";
 
@@ -20,9 +20,10 @@ export const Route = createFileRoute("/")({
 });
 
 function HomeComponent() {
-  const work = useQuery(api.portfolio.listWork);
-  const projects = useQuery(api.portfolio.listProjects);
-  const links = useQuery(api.portfolio.listLinks);
+  // useSuspenseQuery uses the prefetched data from the loader - no loading state!
+  const { data: work } = useSuspenseQuery(convexQuery(api.portfolio.listWork, {}));
+  const { data: projects } = useSuspenseQuery(convexQuery(api.portfolio.listProjects, {}));
+  const { data: links } = useSuspenseQuery(convexQuery(api.portfolio.listLinks, {}));
 
   return (
     <div className="min-h-screen bg-[#F9F4EB] text-[#1a1a1a] font-mono p-8 md:p-16 selection:bg-[#ddd] selection:text-black">
@@ -57,9 +58,7 @@ function HomeComponent() {
           <h2 className="text-black font-black text-xl">* work</h2>
           
           <div className="space-y-8">
-            {work === undefined ? (
-              <p className="text-[#666] text-sm">loading...</p>
-            ) : work.length === 0 ? (
+            {work.length === 0 ? (
               <p className="text-[#666] text-sm">no work experience added yet.</p>
             ) : (
               work.map((item) => (
@@ -82,9 +81,7 @@ function HomeComponent() {
           <h2 className="text-black font-black text-xl">* projects</h2>
            
           <div className="space-y-8">
-            {projects === undefined ? (
-              <p className="text-[#666] text-sm">loading...</p>
-            ) : projects.length === 0 ? (
+            {projects.length === 0 ? (
               <p className="text-[#666] text-sm">no projects added yet.</p>
             ) : (
               projects.map((item) => (
@@ -112,9 +109,7 @@ function HomeComponent() {
         <section className="space-y-8 pt-8">
           <h2 className="text-black font-black text-xl">* links</h2>
           <div className="flex flex-wrap gap-6 text-base text-[#555]">
-            {links === undefined ? (
-              <p className="text-[#666] text-sm">loading...</p>
-            ) : links.length === 0 ? (
+            {links.length === 0 ? (
               <p className="text-[#666] text-sm">no links added yet.</p>
             ) : (
               links.map((item) => (
@@ -141,3 +136,4 @@ function HomeComponent() {
     </div>
   );
 }
+
