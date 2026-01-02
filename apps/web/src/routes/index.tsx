@@ -1,9 +1,22 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "convex/react";
 import { api } from "@tanweihup.dev/backend/convex/_generated/api";
+import { convexQuery } from "@convex-dev/react-query";
 
 export const Route = createFileRoute("/")({
   component: HomeComponent,
+  loader: async ({ context }) => {
+    // Prefetch data on the server for SSR
+    await Promise.all([
+      context.queryClient.ensureQueryData(convexQuery(api.portfolio.listWork, {})),
+      context.queryClient.ensureQueryData(convexQuery(api.portfolio.listProjects, {})),
+      context.queryClient.ensureQueryData(convexQuery(api.portfolio.listLinks, {})),
+    ]);
+  },
+  headers: () => ({
+    // Cache for 5 minutes at CDN, serve stale for up to 24 hours while revalidating
+    "Cache-Control": "public, max-age=300, s-maxage=300, stale-while-revalidate=86400",
+  }),
 });
 
 function HomeComponent() {
@@ -128,4 +141,3 @@ function HomeComponent() {
     </div>
   );
 }
-
