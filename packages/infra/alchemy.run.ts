@@ -20,6 +20,6 @@ export const web = await TanStackStart("web", {
 });
 
 console.log(`Web    -> ${web.url}`);
-console.log(`Web    -> ${web.domains?.map((domain) => domain.name).join(", ")}`);
+console.log(`Web    -> ${web.domains?.map((domain) => `${"https://" + domain.name}`).join(", ")}`);
 
 await app.finalize();
