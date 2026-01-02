@@ -26,7 +26,6 @@ export default function LinkForm({ editingLink, onSuccess }: LinkFormProps) {
     defaultValues: {
       label: editingLink?.label ?? "",
       url: editingLink?.url ?? "",
-      order: editingLink?.order ?? 0,
     },
     onSubmit: async ({ value }) => {
       try {
@@ -35,14 +34,14 @@ export default function LinkForm({ editingLink, onSuccess }: LinkFormProps) {
             id: editingLink._id,
             label: value.label,
             url: value.url,
-            order: value.order,
+            order: editingLink.order,
           });
           toast.success("Link updated");
         } else {
           await createLink({
             label: value.label,
             url: value.url,
-            order: value.order,
+            order: Date.now(),
           });
           toast.success("Link added");
         }
@@ -66,7 +65,7 @@ export default function LinkForm({ editingLink, onSuccess }: LinkFormProps) {
         {editingLink ? "Edit Link" : "Add Link"}
       </h3>
 
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 gap-4">
         <form.Field name="label">
           {(field) => (
             <div className="space-y-2">
@@ -95,21 +94,6 @@ export default function LinkForm({ editingLink, onSuccess }: LinkFormProps) {
                 className="bg-white border-[#ccc] text-black"
               />
 
-            </div>
-          )}
-        </form.Field>
-
-        <form.Field name="order">
-          {(field) => (
-            <div className="space-y-2">
-              <Label htmlFor={field.name} className="text-black">Order</Label>
-              <Input
-                id={field.name}
-                type="number"
-                value={field.state.value}
-                onChange={(e) => field.handleChange(parseInt(e.target.value) || 0)}
-                className="bg-white border-[#ccc] text-black"
-              />
             </div>
           )}
         </form.Field>

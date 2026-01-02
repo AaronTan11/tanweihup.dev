@@ -33,7 +33,6 @@ export default function WorkForm({ editingWork, onSuccess }: WorkFormProps) {
       startDate: editingWork?.startDate ?? "",
       endDate: editingWork?.endDate ?? "",
       description: editingWork?.description ?? "",
-      order: editingWork?.order ?? 0,
     },
     onSubmit: async ({ value }) => {
       try {
@@ -45,7 +44,7 @@ export default function WorkForm({ editingWork, onSuccess }: WorkFormProps) {
             startDate: value.startDate,
             endDate: value.endDate || undefined,
             description: value.description,
-            order: value.order,
+            order: editingWork.order,
           });
           toast.success("Work experience updated");
         } else {
@@ -55,7 +54,7 @@ export default function WorkForm({ editingWork, onSuccess }: WorkFormProps) {
             startDate: value.startDate,
             endDate: value.endDate || undefined,
             description: value.description,
-            order: value.order,
+            order: Date.now(),
           });
           toast.success("Work experience added");
         }
@@ -111,7 +110,7 @@ export default function WorkForm({ editingWork, onSuccess }: WorkFormProps) {
         </form.Field>
       </div>
 
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 gap-4">
         <form.Field name="startDate">
           {(field) => (
             <div className="space-y-2">
@@ -137,21 +136,6 @@ export default function WorkForm({ editingWork, onSuccess }: WorkFormProps) {
                 placeholder="leave empty for 'present'"
                 value={field.state.value}
                 onChange={(e) => field.handleChange(e.target.value)}
-                className="bg-white border-[#ccc] text-black"
-              />
-            </div>
-          )}
-        </form.Field>
-
-        <form.Field name="order">
-          {(field) => (
-            <div className="space-y-2">
-              <Label htmlFor={field.name} className="text-black">Order</Label>
-              <Input
-                id={field.name}
-                type="number"
-                value={field.state.value}
-                onChange={(e) => field.handleChange(parseInt(e.target.value) || 0)}
                 className="bg-white border-[#ccc] text-black"
               />
             </div>

@@ -54,9 +54,10 @@ export default function LinkTable({ onEdit }: LinkTableProps) {
   };
 
   const columns = [
-    columnHelper.accessor("order", {
+    columnHelper.display({
+      id: "index",
       header: "#",
-      cell: (info) => info.getValue(),
+      cell: ({ row }) => row.index + 1,
     }),
     columnHelper.accessor("label", {
       header: "Label",

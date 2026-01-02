@@ -21,7 +21,7 @@ export const listWork = query({
     })
   ),
   handler: async (ctx) => {
-    return await ctx.db.query("work").withIndex("by_order").order("asc").collect();
+    return await ctx.db.query("work").withIndex("by_order").order("desc").collect();
   },
 });
 
@@ -39,7 +39,7 @@ export const listProjects = query({
     })
   ),
   handler: async (ctx) => {
-    return await ctx.db.query("projects").withIndex("by_order").order("asc").collect();
+    return await ctx.db.query("projects").withIndex("by_order").order("desc").collect();
   },
 });
 
@@ -55,7 +55,7 @@ export const listLinks = query({
     })
   ),
   handler: async (ctx) => {
-    return await ctx.db.query("links").withIndex("by_order").order("asc").collect();
+    return await ctx.db.query("links").withIndex("by_order").order("desc").collect();
   },
 });
 

@@ -58,9 +58,10 @@ export default function ProjectTable({ onEdit }: ProjectTableProps) {
   };
 
   const columns = [
-    columnHelper.accessor("order", {
+    columnHelper.display({
+      id: "index",
       header: "#",
-      cell: (info) => info.getValue(),
+      cell: ({ row }) => row.index + 1,
     }),
     columnHelper.accessor("name", {
       header: "Name",

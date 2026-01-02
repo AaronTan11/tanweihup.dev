@@ -31,7 +31,6 @@ export default function ProjectForm({ editingProject, onSuccess }: ProjectFormPr
       role: editingProject?.role ?? "",
       description: editingProject?.description ?? "",
       url: editingProject?.url ?? "",
-      order: editingProject?.order ?? 0,
     },
     onSubmit: async ({ value }) => {
       try {
@@ -42,7 +41,7 @@ export default function ProjectForm({ editingProject, onSuccess }: ProjectFormPr
             role: value.role,
             description: value.description,
             url: value.url || undefined,
-            order: value.order,
+            order: editingProject.order,
           });
           toast.success("Project updated");
         } else {
@@ -51,7 +50,7 @@ export default function ProjectForm({ editingProject, onSuccess }: ProjectFormPr
             role: value.role,
             description: value.description,
             url: value.url || undefined,
-            order: value.order,
+            order: Date.now(),
           });
           toast.success("Project added");
         }
@@ -118,21 +117,6 @@ export default function ProjectForm({ editingProject, onSuccess }: ProjectFormPr
                 placeholder="https://..."
                 value={field.state.value}
                 onChange={(e) => field.handleChange(e.target.value)}
-                className="bg-white border-[#ccc] text-black"
-              />
-            </div>
-          )}
-        </form.Field>
-
-        <form.Field name="order">
-          {(field) => (
-            <div className="space-y-2">
-              <Label htmlFor={field.name} className="text-black">Order</Label>
-              <Input
-                id={field.name}
-                type="number"
-                value={field.state.value}
-                onChange={(e) => field.handleChange(parseInt(e.target.value) || 0)}
                 className="bg-white border-[#ccc] text-black"
               />
             </div>

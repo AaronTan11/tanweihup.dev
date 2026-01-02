@@ -122,6 +122,7 @@ function HomeComponent() {
         {/* Footer/Signature */}
         <footer className="pt-20 pb-12 text-xs text-[#888]">
           <p>deployed via tanweihup.dev</p>
+          <p>inspired by nexxel.dev and rebuilt with tanstack start</p>
         </footer>
       </div>
     </div>

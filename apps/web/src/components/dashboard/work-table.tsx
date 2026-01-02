@@ -60,9 +60,10 @@ export default function WorkTable({ onEdit }: WorkTableProps) {
   };
 
   const columns = [
-    columnHelper.accessor("order", {
+    columnHelper.display({
+      id: "index",
       header: "#",
-      cell: (info) => info.getValue(),
+      cell: ({ row }) => row.index + 1,
     }),
     columnHelper.accessor("company", {
       header: "Company",

@@ -63,7 +63,7 @@ function RouteComponent() {
 
           {/* Tabs */}
           <Tabs defaultValue="work" className="w-full">
-            <TabsList variant="line" className="mb-8">
+            <TabsList variant="default" className="mb-8">
               <TabsTrigger value="work" className="text-base px-4 py-2">Work</TabsTrigger>
               <TabsTrigger value="projects" className="text-base px-4 py-2">Projects</TabsTrigger>
               <TabsTrigger value="links" className="text-base px-4 py-2">Links</TabsTrigger>
