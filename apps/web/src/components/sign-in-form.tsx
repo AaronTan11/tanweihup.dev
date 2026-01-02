@@ -47,8 +47,8 @@ export default function SignInForm({ onSwitchToSignUp }: { onSwitchToSignUp: () 
   });
 
   return (
-    <div className="mx-auto w-full mt-10 max-w-md p-6">
-      <h1 className="mb-6 text-center text-3xl font-bold">Welcome Back</h1>
+    <div className="mx-auto w-full mt-10 max-w-md p-6 bg-[#F9F4EB] rounded-lg">
+      <h1 className="mb-6 text-center text-3xl font-black text-black">Welcome Back</h1>
 
       <form
         onSubmit={(e) => {
@@ -62,7 +62,7 @@ export default function SignInForm({ onSwitchToSignUp }: { onSwitchToSignUp: () 
           <form.Field name="email">
             {(field) => (
               <div className="space-y-2">
-                <Label htmlFor={field.name}>Email</Label>
+                <Label htmlFor={field.name} className="text-black font-medium">Email</Label>
                 <Input
                   id={field.name}
                   name={field.name}
@@ -70,9 +70,10 @@ export default function SignInForm({ onSwitchToSignUp }: { onSwitchToSignUp: () 
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
+                  className="bg-white border-[#ccc] text-black"
                 />
                 {field.state.meta.errors.map((error) => (
-                  <p key={error?.message} className="text-red-500">
+                  <p key={error?.message} className="text-red-600 text-sm">
                     {error?.message}
                   </p>
                 ))}
@@ -85,7 +86,7 @@ export default function SignInForm({ onSwitchToSignUp }: { onSwitchToSignUp: () 
           <form.Field name="password">
             {(field) => (
               <div className="space-y-2">
-                <Label htmlFor={field.name}>Password</Label>
+                <Label htmlFor={field.name} className="text-black font-medium">Password</Label>
                 <Input
                   id={field.name}
                   name={field.name}
@@ -93,9 +94,10 @@ export default function SignInForm({ onSwitchToSignUp }: { onSwitchToSignUp: () 
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
+                  className="bg-white border-[#ccc] text-black"
                 />
                 {field.state.meta.errors.map((error) => (
-                  <p key={error?.message} className="text-red-500">
+                  <p key={error?.message} className="text-red-600 text-sm">
                     {error?.message}
                   </p>
                 ))}
@@ -108,7 +110,7 @@ export default function SignInForm({ onSwitchToSignUp }: { onSwitchToSignUp: () 
           {(state) => (
             <Button
               type="submit"
-              className="w-full"
+              className="w-full bg-black text-white hover:bg-gray-800"
               disabled={!state.canSubmit || state.isSubmitting}
             >
               {state.isSubmitting ? "Submitting..." : "Sign In"}
@@ -121,7 +123,7 @@ export default function SignInForm({ onSwitchToSignUp }: { onSwitchToSignUp: () 
         <Button
           variant="link"
           onClick={onSwitchToSignUp}
-          className="text-indigo-600 hover:text-indigo-800"
+          className="text-black hover:text-gray-600"
         >
           Need an account? Sign Up
         </Button>
@@ -129,3 +131,4 @@ export default function SignInForm({ onSwitchToSignUp }: { onSwitchToSignUp: () 
     </div>
   );
 }
+
