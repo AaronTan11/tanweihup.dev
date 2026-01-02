@@ -43,7 +43,7 @@ type ProjectItem = {
 const columnHelper = createColumnHelper<ProjectItem>();
 
 export default function ProjectTable({ onEdit }: ProjectTableProps) {
-  const projects = useQuery(api.portfolio.listProjects);
+  const projects = useQuery(api.portfolio.listProjectsAsc);
   const deleteProject = useMutation(api.portfolio.deleteProject);
 
   const handleDelete = async (id: Id<"projects">) => {

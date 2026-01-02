@@ -59,6 +59,60 @@ export const listLinks = query({
   },
 });
 
+// Dashboard queries (ascending order for table display)
+export const listWorkAsc = query({
+  args: {},
+  returns: v.array(
+    v.object({
+      _id: v.id("work"),
+      _creationTime: v.number(),
+      company: v.string(),
+      role: v.string(),
+      startDate: v.string(),
+      endDate: v.optional(v.string()),
+      description: v.string(),
+      order: v.number(),
+    })
+  ),
+  handler: async (ctx) => {
+    return await ctx.db.query("work").withIndex("by_order").order("asc").collect();
+  },
+});
+
+export const listProjectsAsc = query({
+  args: {},
+  returns: v.array(
+    v.object({
+      _id: v.id("projects"),
+      _creationTime: v.number(),
+      name: v.string(),
+      role: v.string(),
+      description: v.string(),
+      url: v.optional(v.string()),
+      order: v.number(),
+    })
+  ),
+  handler: async (ctx) => {
+    return await ctx.db.query("projects").withIndex("by_order").order("asc").collect();
+  },
+});
+
+export const listLinksAsc = query({
+  args: {},
+  returns: v.array(
+    v.object({
+      _id: v.id("links"),
+      _creationTime: v.number(),
+      label: v.string(),
+      url: v.string(),
+      order: v.number(),
+    })
+  ),
+  handler: async (ctx) => {
+    return await ctx.db.query("links").withIndex("by_order").order("asc").collect();
+  },
+});
+
 // ============================================================================
 // PROTECTED MUTATIONS (require auth)
 // ============================================================================

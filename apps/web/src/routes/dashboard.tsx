@@ -68,27 +68,27 @@ function RouteComponent() {
               <TabsTrigger value="links" className="text-base px-4 py-2">Links</TabsTrigger>
             </TabsList>
 
-            {/* Work Tab */}
             <TabsContent value="work" className="space-y-8">
               <WorkForm
+                key={editingWork?._id ?? "new"}
                 editingWork={editingWork}
                 onSuccess={() => setEditingWork(undefined)}
               />
               <WorkTable onEdit={(work) => setEditingWork(work)} />
             </TabsContent>
 
-            {/* Projects Tab */}
             <TabsContent value="projects" className="space-y-8">
               <ProjectForm
+                key={editingProject?._id ?? "new"}
                 editingProject={editingProject}
                 onSuccess={() => setEditingProject(undefined)}
               />
               <ProjectTable onEdit={(project) => setEditingProject(project)} />
             </TabsContent>
 
-            {/* Links Tab */}
             <TabsContent value="links" className="space-y-8">
               <LinkForm
+                key={editingLink?._id ?? "new"}
                 editingLink={editingLink}
                 onSuccess={() => setEditingLink(undefined)}
               />

@@ -39,7 +39,7 @@ type LinkItem = {
 const columnHelper = createColumnHelper<LinkItem>();
 
 export default function LinkTable({ onEdit }: LinkTableProps) {
-  const links = useQuery(api.portfolio.listLinks);
+  const links = useQuery(api.portfolio.listLinksAsc);
   const deleteLink = useMutation(api.portfolio.deleteLink);
 
   const handleDelete = async (id: Id<"links">) => {

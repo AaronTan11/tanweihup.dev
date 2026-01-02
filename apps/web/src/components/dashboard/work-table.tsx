@@ -45,7 +45,7 @@ type WorkItem = {
 const columnHelper = createColumnHelper<WorkItem>();
 
 export default function WorkTable({ onEdit }: WorkTableProps) {
-  const work = useQuery(api.portfolio.listWork);
+  const work = useQuery(api.portfolio.listWorkAsc);
   const deleteWork = useMutation(api.portfolio.deleteWork);
 
   const handleDelete = async (id: Id<"work">) => {
