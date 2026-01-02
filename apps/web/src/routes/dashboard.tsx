@@ -4,7 +4,6 @@ import { useState } from "react";
 import type { Id } from "@tanweihup.dev/backend/convex/_generated/dataModel";
 
 import SignInForm from "@/components/sign-in-form";
-import SignUpForm from "@/components/sign-up-form";
 import UserMenu from "@/components/user-menu";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -46,7 +45,7 @@ type EditingLink = {
 };
 
 function RouteComponent() {
-  const [showSignIn, setShowSignIn] = useState(false);
+  const [showSignIn, setShowSignIn] = useState(true);
   const [editingWork, setEditingWork] = useState<EditingWork | undefined>(undefined);
   const [editingProject, setEditingProject] = useState<EditingProject | undefined>(undefined);
   const [editingLink, setEditingLink] = useState<EditingLink | undefined>(undefined);
@@ -101,10 +100,8 @@ function RouteComponent() {
 
       <Unauthenticated>
         <div className="min-h-screen flex items-center justify-center bg-[#F9F4EB]">
-          {showSignIn ? (
+          {showSignIn === true && (
             <SignInForm onSwitchToSignUp={() => setShowSignIn(false)} />
-          ) : (
-            <SignUpForm onSwitchToSignIn={() => setShowSignIn(true)} />
           )}
         </div>
       </Unauthenticated>
