@@ -14,8 +14,8 @@ export const Route = createFileRoute("/")({
     ]);
   },
   headers: () => ({
-    // Cache for 5 minutes at CDN, serve stale for up to 24 hours while revalidating
-    "Cache-Control": "public, max-age=300, s-maxage=300, stale-while-revalidate=86400",
+    // Cache for 24 hours at CDN, serve stale for up to 72 hours while revalidating
+    "Cache-Control": "public, max-age=86400, s-maxage=86400, stale-while-revalidate=259200",
   }),
 });
 
